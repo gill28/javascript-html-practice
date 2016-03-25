@@ -16,6 +16,7 @@
 <body>
 
     <div class="site">
+
         <div class="site-hd">
 
             <img src="./assets/images/logo.png" alt="">
@@ -27,13 +28,14 @@
             </ul>
 
         </div>
+
         <div class="site-nav">
 
-            <ul>
+            <ul class="site-nav-main">
                 <li><a href="#">Destinations</a></li>
                 <li><a href="#">Getaways</a></li>
                 <li><a href="#">Travel Tips</a></li>
-                <li><a href="#">News &amp; Features</a></li>
+                <li><a href="#" class="news-active">News &amp; Features</a></li>
                 <li><a href="#">Contests</a></li>
                 <li><a href="#">Contact Us</a></li>
             </ul>
@@ -56,9 +58,21 @@
                 </li>
             </ul>
 
+            <ul id="slideBtn">
+                <li class="prev"><a href="#"></a></li>
+                <li class="next"><a href="#"></a></li>
+            </ul>
+
+            <ul class="dot">
+                <li class="dot-item"></li>
+                <li class="dot-item"></li>
+                <li class="dot-item"></li>
+                <li class="dot-item"></li>
+            </ul>
+
             <div class="form">
 
-                <form class="form-hd">
+                <form name="newsletter-signup" action="#" method="post" class="form-hd">
 
                     <h1><img src="assets/images/mail.png" alt="">Sign up for our newsletter</h1>
 
@@ -67,11 +81,16 @@
                     </fieldset>
 
                     <fieldset class="form-hd-news">
+
                         <h2>Select the newsletters you'd like to receive</h2>
                         <br>
-                        <input type="checkbox">Destinations & Getaways
+                        <label>
+                            <input type="checkbox" value="destinations" checked="checked">Destinations &amp; Getaways
+                        </label>
                         <br>
-                        <input type="checkbox">Weekly Travel Tips
+                        <label>
+                            <input type="checkbox" value="destinations" checked="checked">Weekly Travel Tips
+                        </label>
                     </fieldset>
 
                     <button type="submit" value="Submit" id="button">Sign Up</button>
@@ -86,10 +105,10 @@
 
                     <ul class="sList">
                         <li>
-                        <a href="#">Privacy Policy</a>
+                            <a href="#">Privacy Policy</a>
                         </li>
                         <li>
-                        <a href="#">Terms of Use</a>
+                            <a href="#">Terms of Use</a>
                         </li>
                     </ul>
 
@@ -100,9 +119,7 @@
             <div class="testimonial">
 
                 <div class="test-hd">
-
                     <h1><img src="assets/images/pencil.png" alt="">Featured Testimonial</h1>
-
                 </div>
 
                    <p>“Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna ...”</p>
@@ -110,31 +127,29 @@
             </div>
 
             <div class="bar">
-
                 <p>Popular Videos</p>
-
             </div>
 
             <div class="site-vids">
 
                     <ul class="vList">
                         <li>
-                        <img src="assets/images/mongoose.png" alt="">
+                        <a href="#"><img src="assets/images/mongoose.png" alt=""></a>
                         </li>
                         <li>
-                        <img src="assets/images/cathedral.png" alt="">
+                        <a href="#"><img src="assets/images/cathedral.png" alt=""></a>
                         </li>
                         <li>
-                        <img src="assets/images/hollywood.png" alt="">
+                        <a href="#"><img src="assets/images/hollywood.png" alt=""></a>
                         </li>
                         <li>
-                        <img src="assets/images/lake.png" alt="">
+                        <a href="#"><img src="assets/images/lake.png" alt=""></a>
                         </li>
                         <li>
-                        <img src="assets/images/fountains.png" alt="">
+                        <a href="#"><img src="assets/images/fountains.png" alt=""></a>
                         </li>
                         <li>
-                        <img src="assets/images/coast.png" alt="">
+                        <a href="#"><img src="assets/images/coast.png" alt=""></a>
                         </li>
                     </ul>
 
@@ -148,42 +163,52 @@
 
                 <ul class="hList">
                     <li>
-                    <a href="#">Privacy Policy</a>
+                        <a href="#">Privacy Policy</a>
                     </li>
                     <li>
-                    <a href="#">Terms of Use</a>
+                        <a href="#">Terms of Use</a>
                     </li>
                     <li>
-                    <a href="#">Site Map</a>
+                        <a href="#">Site Map</a>
                     </li>
                     <li>
-                    <a href="#">Contact Us</a>
+                        <a href="#">Contact Us</a>
                     </li>
                 </ul>
 
                 <div class="icons">
                     <ul class="iList">
                         <li>
-                        <img src="assets/images/facebook.png" alt="">
+                            <img src="assets/images/facebook.png" alt="">
                         </li>
                         <li>
-                        <img src="assets/images/flicker.png" alt="">
+                            <img src="assets/images/flicker.png" alt="">
                         </li>
                         <li>
-                        <img src="assets/images/twitter.png" alt="">
+                            <img src="assets/images/twitter.png" alt="">
                         </li>
                         <li>
-                        <img src="assets/images/velocity.png" alt="">
+                            <img src="assets/images/velocity.png" alt="">
                         </li>
                         <li>
-                        <img src="assets/images/signal.png" alt="">
+                            <img src="assets/images/signal.png" alt="">
                         </li>
                     </ul>
+                </div>
+
+                <div class="copyright">
+
+                    <ul class="copyList">
+                        <li>&copy; 2013 &amp; Mulberry</li>
+                        <li>1640 Riverside Drive, Hill Valley, California, 95420</li>
+                    </ul>
+
                 </div>
 
             </div>
 
         </div>
+
     </div>
 
     <!-- SCRIPTS -->

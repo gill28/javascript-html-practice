@@ -4,13 +4,13 @@
  * @author nerdery
  */
 $(function() {
-
     /**
      * Timing variables used in this view
      * @property TIMING
      * @type {Object}
      * @final
      */
+
     var TIMING = {
         INTERVAL: 4000
     };
@@ -24,7 +24,9 @@ $(function() {
      */
     var CLASSES = {
         ACTIVE_SLIDE_CLASS: 'carousel-item_isActive',
-        INACTIVE_SLIDE_CLASS: 'carousel-item_isInactive'
+        INACTIVE_SLIDE_CLASS: 'carousel-item_isInactive',
+        ACTIVE_DOT: 'dot-item_isActive',
+        INACTIVE_DOT: 'dot-item_isInactive'
     };
 
     /**
@@ -35,7 +37,12 @@ $(function() {
      * @final
      */
     var SELECTORS = {
-        CAROUSEL_ID: '#js-carousel'
+        CAROUSEL_ID: '#js-carousel',
+        DOT_ID: '.dot',
+        NEXT_ID: '.next',
+        PREV_ID: '.prev',
+        ACTIVE_SLIDE_CLASS: '.carousel-item',
+        ACTIVE_DOT: '.dot-item'
     };
 
     /**
@@ -75,7 +82,6 @@ $(function() {
          * @public
          */
         this.$currentSlide = null;
-
         /**
          * The current index of the active slide
          *
@@ -147,6 +153,7 @@ $(function() {
     Carousel.prototype.setupHandlers = function() {
         this.handleCarouselMouseEnter = $.proxy(this.onCarouselMouseEnter, this);
         this.handleCarouselMouseLeave = $.proxy(this.onCarouselMouseLeave, this);
+        this.handleClickNext = $.proxy(this.nextSlide, this);
 
         return this;
     };
@@ -161,17 +168,24 @@ $(function() {
      */
     Carousel.prototype.createChildren = function() {
         this.$carousel = $(SELECTORS.CAROUSEL_ID);
+        this.$dot = $(SELECTORS.DOT_ID);
+        this.$next = $(SELECTORS.NEXT_ID);
+        this.$prev = $(SELECTORS.PREV_ID);
+        this.$item = $(SELECTORS.CAROUSEL_ITEM);
         this.$slides = this.$carousel.children();
+        this.$dots = this.$dot.children();
         this.$currentSlide = this.$slides.eq(this.currentIndex);
+        this.$currentDot = this.$dots.eq(this.currentIndex);
 
         // Count the slides
         this.numSlides = this.$slides.length;
 
         // Make first slide active
         this.$currentSlide.addClass(CLASSES.ACTIVE_SLIDE_CLASS);
-
+        this.$currentDot.addClass(CLASSES.ACTIVE_DOT);
         // Make all slides but the first inactive
         this.$slides.not(this.$currentSlide).addClass(CLASSES.INACTIVE_SLIDE_CLASS);
+        this.$dots.not(this.$currentDot).addClass(CLASSES.INACTIVE_DOT);
 
         return this;
     };
@@ -184,6 +198,11 @@ $(function() {
      * @public
      * @chainable
      */
+
+     Carousel.prototype.onCarouselMouseEnter = function(e) {
+        this.stopSlideshow();
+    };
+
     Carousel.prototype.enable = function() {
         if (this.isEnabled) {
             return this;
@@ -191,6 +210,10 @@ $(function() {
 
         this.$carousel.on('mouseenter', this.handleCarouselMouseEnter);
         this.$carousel.on('mouseleave', this.handleCarouselMouseLeave);
+        this.$next.on('click', this.clickNext.bind(this));
+        this.$prev.on('click', this.clickPrev.bind(this));
+
+
 
         this.isEnabled = true;
 
@@ -283,6 +306,7 @@ $(function() {
      * @chainable
      */
     Carousel.prototype.goToSlide = function(index) {
+
         if (index >= this.numSlides) {
             index = 0;
         } else if (index < 0) {
@@ -293,7 +317,16 @@ $(function() {
             .removeClass(CLASSES.ACTIVE_SLIDE_CLASS)
             .addClass(CLASSES.INACTIVE_SLIDE_CLASS);
 
+        this.$currentDot
+            .removeClass(CLASSES.ACTIVE_DOT)
+            .addClass(CLASSES.INACTIVE_DOT);
+
         this.$currentSlide = this.$slides.eq(index);
+        this.$currentDot = this.$dots.eq(index);
+
+        this.$currentDot
+            .removeClass(CLASSES.INACTIVE_DOT)
+            .addClass(CLASSES.ACTIVE_DOT);
 
         this.$currentSlide
             .removeClass(CLASSES.INACTIVE_SLIDE_CLASS)
@@ -302,12 +335,21 @@ $(function() {
         this.currentIndex = index;
 
         return this;
+
     };
+
 
     //////////////////////////////////////////////////////////
     // EVENT HANDLERS
-    //////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////
 
+    Carousel.prototype.clickNext = function(){
+        this.goToNextSlide();
+    };
+
+    Carousel.prototype.clickPrev = function(){
+        this.goToPreviousSlide();
+    };
     /**
      * Stop slideshow on mouse enter
      * @method onCarouselMouseEnter
@@ -317,7 +359,6 @@ $(function() {
     Carousel.prototype.onCarouselMouseEnter = function(e) {
         this.stopSlideshow();
     };
-
     /**
      * Start slideshow on mouse leave
      * @method onCarouselMouseLeave

@@ -1,3 +1,4 @@
 # javascript-html-practice
 
-I took on this challenge myself and with a PSD file created, I developed the file into a website. I used HTML 5, CSS 3, Javascript, Jquery.
+This is a website that was built using HTML 5, CSS 3, Javascript and Jquery. I was assigned this challenge to create the Static page and build a Carousel.
+
